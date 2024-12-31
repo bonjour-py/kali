@@ -176,6 +176,7 @@ RUN set -eux; \
 	apt install -y code-oss; \
 	apt clean; \
 	rm -rf /var/lib/apt/lists/*;
+
 #tools
 RUN set -eux; \
 	\
@@ -231,3 +232,10 @@ RUN set -eux; \
 		; \
 	apt clean; \
 	rm -rf /var/lib/apt/lists/*; 
+
+# user
+RUN set -eux; \
+	\
+	useradd -m -s /usr/bin/zsh -G kali-trusted bonjour; \
+	touch /var/lib/systemd/linger/bonjour; \
+	echo 'bonjour' | passwd -s bonjour; 
