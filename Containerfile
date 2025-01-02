@@ -75,8 +75,8 @@ RUN set -eux; \
 	echo 'bindsym Mod4+minus workspace prev' | tee -a /etc/xdg/i3/workspace.config; \
 	echo 'bindsym Mod4+equal workspace next' | tee -a /etc/xdg/i3/workspace.config; \
 	echo 'bindsym Mod4+0 scratchpad show' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+minus exec "i3-msg move container workspace $(node -pe %+JSON.parse(process.argv[1]).filter(w => w.focused)[0].id-1% $(i3-msg -t get_workspaces))"' | sed -e "s@%@'@g" | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+equal exec "i3-msg move container workspace $(node -pe %+JSON.parse(process.argv[1]).filter(w => w.focused)[0].id+1% $(i3-msg -t get_workspaces))"' | sed -e "s@%@'@g" | tee -a /etc/xdg/i3/workspace.config; \
+	echo 'bindsym Mod4+Control+minus exec "i3-msg move container workspace $(node -pe %JSON.parse(process.argv[1]).filter(w => w.focused)[0].num-1% $(i3-msg -t get_workspaces))"' | sed -e "s@%@'@g" | tee -a /etc/xdg/i3/workspace.config; \
+	echo 'bindsym Mod4+Control+equal exec "i3-msg move container workspace $(node -pe %JSON.parse(process.argv[1]).filter(w => w.focused)[0].num+1% $(i3-msg -t get_workspaces))"' | sed -e "s@%@'@g" | tee -a /etc/xdg/i3/workspace.config; \
 	echo 'bindsym Mod4+Control+0 move scratchpad' | tee -a /etc/xdg/i3/workspace.config;
 
 RUN set -eux; \
