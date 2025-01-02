@@ -18,16 +18,16 @@ RUN set -eux; \
 	apt clean; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
-	mkdir /etc/systemd/system/polkit.service.d/; \
+	mkdir -p /etc/systemd/system/polkit.service.d; \
 	echo '[Service]\nMemoryDenyWriteExecute=no\nPrivateDevices=no\nLockPersonality=no\nProtectKernelModules=no\nProtectKernelLogs=no\nProtectKernelTunables=no\nProtectClock=no\nProtectHostname=no\nRestrictAddressFamilies=\nRestrictNamespaces=no\nRestrictRealtime=no\nRestrictSUIDSGID=no\nSystemCallArchitectures=\nSystemCallFilter=' | tee /etc/systemd/system/polkit.service.d/local.conf; \
 	\
-	mkdir /etc/systemd/system/user-.slice.d; \
+	mkdir -p /etc/systemd/system/user-.slice.d; \
 	echo '[Slice]' | tee /etc/systemd/system/user-.slice.d/local.conf; \
 	echo 'TasksMax=infinity' | tee -a /etc/systemd/system/user-.slice.d/local.conf; \
 	\
 	sed -i -e 's@60000@2000@g'  -e 's@600100000@60000@g' -e 's@100000@20000@g' -e 's@65536@20000@g' /etc/login.defs; \
 	\
-	mkdir -p /var/lib/systemd/linger/;
+	mkdir -p /var/lib/systemd/linger;
 
 CMD ["/usr/sbin/init"] 
 
@@ -39,7 +39,7 @@ RUN set -eux; \
 	apt clean; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
-	mkdir /etc/xdg/i3/; \
+	mkdir -p /etc/xdg/i3; \
 	\
 	echo '# i3 config file (v4)' | tee /etc/xdg/i3/config; \
 	echo 'include ./*.config' | tee -a /etc/xdg/i3/config; \
@@ -109,15 +109,14 @@ RUN set -eux; \
 	echo 'exec --no-startup-id dex --autostart --environment i3' | tee -a /etc/xdg/i3/dex.config;
 
 RUN set -eux; \
-	mkdir /usr/share/backgrounds/pure/; \
+	mkdir -p /usr/share/backgrounds/pure; \
 	convert -size 1x1 xc:black /usr/share/backgrounds/pure/black.png; \
-	mkdir /etc/xdg/nitrogen/; \
-	echo '[xin_-1]\nfile=/usr/share/backgrounds/pure/black.png\nmode=4\nbgcolor=#000000' | tee /etc/xdg/nitrogen/bg-saved.cfg; \
+	\
 	echo '# i3 config file (v4)' | tee /etc/xdg/i3/wallpaper.config; \
-	echo 'exec_always --no-startup-id nitrogen --restore' | tee -a /etc/xdg/i3/wallpaper.config;
+	echo 'exec_always --no-startup-id feh --bg-scale /usr/share/backgrounds/pure/black.png' | tee -a /etc/xdg/i3/wallpaper.config;
 
 RUN set -eux; \
-	mkdir /etc/xdg/polybar/; \
+	mkdir -p /etc/xdg/polybar; \
 	echo 'include-file = /etc/polybar/config.ini'  | tee /etc/xdg/polybar/config.ini; \
 	echo '[bar/default]'  | tee -a /etc/xdg/polybar/config.ini; \
 	echo 'inherit = bar/example'  | tee -a /etc/xdg/polybar/config.ini; \
@@ -192,10 +191,16 @@ RUN set -eux; \
 	setcap cap_setuid=ep /usr/bin/newuidmap; \
 	setcap cap_setgid=ep /usr/bin/newgidmap; \
 	\
-	echo '[containers]\nnetns = "host"\nuserns = "host"\nipcns = "host"\nutsns = "host"\ncgroupns = "host"\ncgroups = "disabled"' | tee /etc/containers/containers.conf; \
+	echo '[containers]' | tee /etc/containers/containers.conf; \
+	echo 'netns = "host"' | tee -a /etc/containers/containers.conf; \
+	echo 'ipcns = "host"' | tee -a /etc/containers/containers.conf; \
+	echo 'utsns = "host"' | tee -a /etc/containers/containers.conf; \
+	echo 'ncgroupns = "host"' | tee -a /etc/containers/containers.conf; \
+	echo 'cgroups = "disabled"' | tee -a /etc/containers/containers.conf; \
 	\
-	mkdir /etc/skel/.config/containers/; \
-	echo '[containers]\nvolumes = ["/proc:/proc"]' | tee /etc/skel/.config/containers/containers.conf; 
+	mkdir -p /etc/skel/.config/containers; \
+	echo '[containers]'  | tee /etc/skel/.config/containers/containers.conf; \
+	echo 'volumes = ["/proc:/proc"]' | tee -a /etc/skel/.config/containers/containers.conf; 
 
 RUN set -eux; \
 	\
@@ -241,4 +246,4 @@ RUN set -eux; \
 	\
 	useradd -m -s /usr/bin/zsh -G kali-trusted bonjour; \
 	touch /var/lib/systemd/linger/bonjour; \
-	echo 'bonjour' | passwd -s bonjour; 
+	echo 'bonjour' | passwd -s bonjour;
