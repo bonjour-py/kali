@@ -18,6 +18,9 @@ RUN set -eux; \
 	apt clean; \
 	rm -rf /var/lib/apt/lists/*; \
 	\
+	mkdir /etc/systemd/system/polkit.service.d/; \
+	echo '[Service]\nMemoryDenyWriteExecute=no\nPrivateDevices=no\nLockPersonality=no\nProtectKernelModules=no\nProtectKernelLogs=no\nProtectKernelTunables=no\nProtectClock=no\nProtectHostname=no\nRestrictAddressFamilies=\nRestrictNamespaces=no\nRestrictRealtime=no\nRestrictSUIDSGID=no\nSystemCallArchitectures=\nSystemCallFilter=' | tee /etc/systemd/system/polkit.service.d/local.conf; \
+	\
 	mkdir /etc/systemd/system/user-.slice.d; \
 	echo '[Slice]' | tee /etc/systemd/system/user-.slice.d/local.conf; \
 	echo 'TasksMax=infinity' | tee -a /etc/systemd/system/user-.slice.d/local.conf; \
