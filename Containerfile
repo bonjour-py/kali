@@ -45,7 +45,7 @@ RUN set -eux; \
 	echo 'include ./*.config' | tee -a /etc/xdg/i3/config; \
 	\
 	echo '# i3 config file (v4)' | tee /etc/xdg/i3/power.config; \
-	echo 'bindsym Mod4+Shift+Escape exec "i3-nagbar -t warning -m %You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.% -B %Yes, exit i3% %i3-msg exit%"' | sed -e "s@%@'@g" | tee -a /etc/xdg/i3/power.config; \
+	echo 'bindsym Mod4+Shift+e exec "i3-nagbar -t warning -m %You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.% -B %Yes, exit i3% %i3-msg exit%"' | sed -e "s@%@'@g" | tee -a /etc/xdg/i3/power.config; \
 	echo 'bindsym Mod4+Shift+r restart' | tee -a /etc/xdg/i3/power.config; \
 	echo 'bindsym Mod4+Shift+c reload' | tee -a /etc/xdg/i3/power.config; \
 	echo 'bindsym Mod4+Shift+l exec i3lock' | tee -a /etc/xdg/i3/power.config; \
@@ -58,16 +58,14 @@ RUN set -eux; \
 	echo 'default_border pixel' | tee -a /etc/xdg/i3/window.config; \
 	echo 'floating_modifier Mod4' | tee -a /etc/xdg/i3/window.config; \
 	echo 'bindsym Mod4+Control+q kill' | tee -a /etc/xdg/i3/window.config; \
-	echo 'bindsym Mod4+j move left' | tee -a /etc/xdg/i3/window.config; \
-	echo 'bindsym Mod4+k move down' | tee -a /etc/xdg/i3/window.config; \
-	echo 'bindsym Mod4+i move up' | tee -a /etc/xdg/i3/window.config; \
+	echo 'bindsym Mod4+h move left' | tee -a /etc/xdg/i3/window.config; \
+	echo 'bindsym Mod4+j move down' | tee -a /etc/xdg/i3/window.config; \
+	echo 'bindsym Mod4+k move up' | tee -a /etc/xdg/i3/window.config; \
 	echo 'bindsym Mod4+l move right' | tee -a /etc/xdg/i3/window.config; \
-	echo 'bindsym Mod4+Control+j resize shrink width 1 px or 1 ppt' | tee -a /etc/xdg/i3/window.config; \
-	echo 'bindsym Mod4+Control+k resize grow height 1 px or 1 ppt' | tee -a /etc/xdg/i3/window.config; \
-	echo 'bindsym Mod4+Control+i resize shrink height 1 px or 1 ppt' | tee -a /etc/xdg/i3/window.config; \
+	echo 'bindsym Mod4+Control+h resize shrink width 1 px or 1 ppt' | tee -a /etc/xdg/i3/window.config; \
+	echo 'bindsym Mod4+Control+j resize grow height 1 px or 1 ppt' | tee -a /etc/xdg/i3/window.config; \
+	echo 'bindsym Mod4+Control+k resize shrink height 1 px or 1 ppt' | tee -a /etc/xdg/i3/window.config; \
 	echo 'bindsym Mod4+Control+l resize grow width 1 px or 1 ppt' | tee -a /etc/xdg/i3/window.config; \
-	echo 'bindsym Mod4+h split h' | tee -a /etc/xdg/i3/window.config; \
-	echo 'bindsym Mod4+v split v' | tee -a /etc/xdg/i3/window.config; \
 	echo 'bindsym Mod4+s floating toggle' | tee -a /etc/xdg/i3/window.config; \
 	echo 'bindsym Mod4+f fullscreen toggle' | tee -a /etc/xdg/i3/window.config; \
 	echo 'bindsym Mod4+e layout toggle split' | tee -a /etc/xdg/i3/window.config; \
@@ -76,30 +74,10 @@ RUN set -eux; \
 	echo 'workspace_auto_back_and_forth yes' | tee -a /etc/xdg/i3/workspace.config; \
 	echo 'bindsym Mod4+minus workspace prev' | tee -a /etc/xdg/i3/workspace.config; \
 	echo 'bindsym Mod4+equal workspace next' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+grave scratchpad show' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+1 workspace 1' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+2 workspace 2' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+3 workspace 3' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+4 workspace 4' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+5 workspace 5' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+6 workspace 6' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+7 workspace 7' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+8 workspace 8' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+9 workspace 9' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+0 workspace 10' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+minus move container workspace prev' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+equal move container workspace next' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+grave move scratchpad' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+1 move container workspace 1' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+2 move container workspace 2' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+3 move container workspace 3' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+4 move container workspace 4' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+5 move container workspace 5' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+6 move container workspace 6' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+7 move container workspace 7' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+8 move container workspace 8' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+9 move container workspace 9' | tee -a /etc/xdg/i3/workspace.config; \
-	echo 'bindsym Mod4+Control+0 move container workspace 10' | tee -a /etc/xdg/i3/workspace.config;
+	echo 'bindsym Mod4+0 scratchpad show' | tee -a /etc/xdg/i3/workspace.config; \
+	echo 'bindsym Mod4+Control+minus exec "i3-msg move container workspace $(node -pe %+JSON.parse(process.argv[1]).filter(w => w.focused)[0].id-1% $(i3-msg -t get_workspaces))"' | sed -e "s@%@'@g" | tee -a /etc/xdg/i3/workspace.config; \
+	echo 'bindsym Mod4+Control+equal exec "i3-msg move container workspace $(node -pe %+JSON.parse(process.argv[1]).filter(w => w.focused)[0].id+1% $(i3-msg -t get_workspaces))"' | sed -e "s@%@'@g" | tee -a /etc/xdg/i3/workspace.config; \
+	echo 'bindsym Mod4+Control+0 move scratchpad' | tee -a /etc/xdg/i3/workspace.config;
 
 RUN set -eux; \
 	sed -i -e 's@Flat-Remix-Blue-Dark@Flat-Remix-Blue-Light@' -e 's@Kali-Dark@Kali-Light@' /etc/xdg/gtk-3.0/settings.ini /etc/xdg/qt5ct/qt5ct.conf /etc/xdg/qt6ct/qt6ct.conf;
@@ -113,7 +91,7 @@ RUN set -eux; \
 	convert -size 1x1 xc:black /usr/share/backgrounds/pure/black.png; \
 	\
 	echo '# i3 config file (v4)' | tee /etc/xdg/i3/wallpaper.config; \
-	echo 'exec_always --no-startup-id feh --bg-scale /usr/share/backgrounds/pure/black.png' | tee -a /etc/xdg/i3/wallpaper.config;
+	echo 'exec_always --no-startup-id feh --no-fehbg --bg-scale /usr/share/backgrounds/pure/black.png' | tee -a /etc/xdg/i3/wallpaper.config;
 
 RUN set -eux; \
 	mkdir -p /etc/xdg/polybar; \
