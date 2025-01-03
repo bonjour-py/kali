@@ -100,7 +100,7 @@ RUN set -eux; \
 	echo 'inherit = bar/example'  | tee -a /etc/xdg/polybar/config.ini; \
 	echo 'modules-left = xworkspaces'  | tee -a /etc/xdg/polybar/config.ini; \
 	echo 'modules-center = xwindow'  | tee -a /etc/xdg/polybar/config.ini; \
-	echo 'modules-right = systray pulseaudio'  | tee -a /etc/xdg/polybar/config.ini; \
+	echo 'modules-right = systray'  | tee -a /etc/xdg/polybar/config.ini; \
 	echo '#!/usr/bin/env bash'  | tee /etc/xdg/polybar/launch.sh; \
 	echo 'polybar-msg cmd quit'  | tee -a /etc/xdg/polybar/launch.sh; \
 	echo 'polybar default & disown'  | tee -a /etc/xdg/polybar/launch.sh; \
