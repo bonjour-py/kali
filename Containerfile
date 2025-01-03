@@ -5,10 +5,10 @@ RUN set -eux; \
 	\
 	apt update; \
 	apt upgrade -y; \
-	rm -rf /var/lib/apt/lists/*; 
+	rm -rf /var/lib/apt/lists/*;
 
 # root shell
-RUN usermod -s /usr/bin/zsh root; 
+RUN usermod -s /usr/bin/zsh root;
 
 #systemd
 RUN set -eux; \
@@ -29,7 +29,7 @@ RUN set -eux; \
 	\
 	mkdir -p /var/lib/systemd/linger;
 
-CMD ["/usr/sbin/init"] 
+CMD ["/usr/sbin/init"]
 
 # desktop
 RUN set -eux; \
@@ -149,7 +149,7 @@ RUN set -eux; \
 	apt install -y xarchiver; \
 	apt clean; \
 	rm -rf /var/lib/apt/lists/*;
-	
+
 RUN set -eux; \
 	\
 	apt update; \
@@ -178,14 +178,14 @@ RUN set -eux; \
 	\
 	mkdir -p /etc/skel/.config/containers; \
 	echo '[containers]'  | tee /etc/skel/.config/containers/containers.conf; \
-	echo 'volumes = ["/proc:/proc"]' | tee -a /etc/skel/.config/containers/containers.conf; 
+	echo 'volumes = ["/proc:/proc"]' | tee -a /etc/skel/.config/containers/containers.conf;
 
 RUN set -eux; \
 	\
 	apt update; \
 	apt install -y wireshark; \
 	apt clean; \
-	rm -rf /var/lib/apt/lists/*; 
+	rm -rf /var/lib/apt/lists/*;
 
 RUN set -eux; \
 	\
@@ -199,14 +199,14 @@ RUN set -eux; \
 	apt update; \
 	apt install -y cargo; \
 	apt clean; \
-	rm -rf /var/lib/apt/lists/*; 
+	rm -rf /var/lib/apt/lists/*;
 
 RUN set -eux; \
 	\
 	apt update; \
 	apt install -y golang; \
 	apt clean; \
-	rm -rf /var/lib/apt/lists/*; 
+	rm -rf /var/lib/apt/lists/*;
 
 RUN set -eux; \
 	\
@@ -217,7 +217,7 @@ RUN set -eux; \
 		python3-flask \
 		; \
 	apt clean; \
-	rm -rf /var/lib/apt/lists/*; 
+	rm -rf /var/lib/apt/lists/*;
 
 # user
 RUN set -eux; \
